@@ -1,14 +1,14 @@
 import java.util.HashMap;
 
 public class TransformerManager {
-    private HashMap<String, Extractor> transformersMap;
+    private HashMap<String, Transformer> transformersMap;
 
     TransformerManager()
     {
 
     }
 
-    public Extractor getTransformer(String transformerType) {
+    public Transformer getTransformer(String transformerType) {
         return transformersMap.get(transformerType);
     }
 }
