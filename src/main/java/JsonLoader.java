@@ -12,13 +12,12 @@ public class JsonLoader implements Loader{
     @Override
     public void load(ArrayList<DataContainer> dataContainer, String destPath) {
         ObjectMapper objectMapper = new ObjectMapper();
-        FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter(destPath, true);
-            for(DataContainer container : dataContainer)
-            {
-                objectMapper.writeValue(fileWriter , container.getData());
-            }
+            FileWriter f = new FileWriter(destPath);
+            f.write(" ");
+            f.flush();
+            f.close();
+            objectMapper.writeValue(new FileWriter(destPath, true) , dataContainer);
         } catch (IOException e) {
             e.printStackTrace();
         }

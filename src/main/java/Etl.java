@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 public class Etl {
     private Extractor extractor;
@@ -20,13 +21,16 @@ public class Etl {
 
     public void processData()
     {
+        int currentFileIndex = 0;
         ArrayList<DataContainer> dataContainer;
         dataContainer = extractor.extract(srcPath);
         dataContainer = transformer.transform(dataContainer);
         ArrayList<ArrayList<DataContainer>> dataContainers = recordLimiter.getLimitedList(dataContainer);
         for(ArrayList<DataContainer> containersList : dataContainers)
         {
-            loader.load(containersList, destPath);
+            String nextName = destPath.substring(0, destPath.lastIndexOf('.')) + "" + currentFileIndex + "" + destPath.substring(destPath.lastIndexOf('.'));
+            loader.load(containersList, nextName);
         }
+        System.out.println("Completed!");
     }
 }
