@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class LoaderManager {
 
-    private HashMap<String, Loader> loadersMap;
+    private static HashMap<String, Loader> loadersMap;
 
     LoaderManager()
     {

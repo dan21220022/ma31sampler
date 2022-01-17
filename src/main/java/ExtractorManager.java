@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class ExtractorManager {
-    private HashMap<String, Extractor> extractorsMap;
+    private static HashMap<String, Extractor> extractorsMap;
 
     ExtractorManager()
     {

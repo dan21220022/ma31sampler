@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class TransformerManager {
-    private HashMap<String, Transformer> transformersMap;
+    private static HashMap<String, Transformer> transformersMap;
 
     TransformerManager()
     {
