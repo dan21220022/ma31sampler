@@ -5,7 +5,8 @@ public class ExtractorManager {
 
     ExtractorManager()
     {
-
+        extractorsMap = new HashMap<>();
+        extractorsMap.put("Csv", new CsvExtractor());
     }
 
     public Extractor getExtractor(String extractorType) {

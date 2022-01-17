@@ -6,7 +6,8 @@ public class LoaderManager {
 
     LoaderManager()
     {
-
+        loadersMap = new HashMap<>();
+        loadersMap.put("Json", new JsonLoader());
     }
 
     public Loader getLoader(String LoaderType) {
