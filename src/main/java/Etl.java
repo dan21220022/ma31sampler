@@ -30,6 +30,7 @@ public class Etl {
         {
             String nextName = destPath.substring(0, destPath.lastIndexOf('.')) + "" + currentFileIndex + "" + destPath.substring(destPath.lastIndexOf('.'));
             loader.load(containersList, nextName);
+            currentFileIndex++;
         }
         System.out.println("Completed!");
     }
