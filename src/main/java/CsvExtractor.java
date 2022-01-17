@@ -26,7 +26,7 @@ public class CsvExtractor implements Extractor{
     private ArrayList<CSVRecord> getRecords(String srcPath)
     {
         try {
-            ArrayList<CSVRecord> records = (ArrayList<CSVRecord>) new CSVParser(new FileReader(srcPath), CSVFormat.MYSQL).getRecords();
+            ArrayList<CSVRecord> records = (ArrayList<CSVRecord>) new CSVParser(new FileReader(srcPath), CSVFormat.DEFAULT).getRecords();
             return records;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -39,9 +39,9 @@ public class CsvExtractor implements Extractor{
     private ArrayList<String> getFieldNames(CSVRecord record)
     {
         ArrayList<String> fieldNames = new ArrayList<>();
-        for(String name : record)
+        for(int i = 0; i < record.size(); i++)
         {
-            fieldNames.add(name);
+            fieldNames.add(record.get(i));
         }
         return fieldNames;
     }
