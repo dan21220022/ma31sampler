@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Etl {
     private Extractor extractor;
     private Transformer transformer;
@@ -16,7 +18,7 @@ public class Etl {
 
     public void processData()
     {
-        DataContainer dataContainer;
+        ArrayList<DataContainer> dataContainer;
         dataContainer = extractor.extract(srcPath);
         dataContainer = transformer.transform(dataContainer);
         loader.load(dataContainer, destPath);

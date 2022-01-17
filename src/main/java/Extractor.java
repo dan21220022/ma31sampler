@@ -1,4 +1,6 @@
+import java.util.ArrayList;
+
 public interface Extractor {
 
-    public DataContainer extract(String srcPath);
+    public ArrayList<DataContainer> extract(String srcPath);
 }

@@ -1,4 +1,6 @@
+import java.util.ArrayList;
+
 public interface Transformer {
 
-    public DataContainer transform(DataContainer dataForTransform);
+    public ArrayList<DataContainer> transform(ArrayList<DataContainer> dataForTransform);
 }
