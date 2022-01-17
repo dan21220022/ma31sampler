@@ -3,17 +3,19 @@ import java.util.ArrayList;
 public class Etl {
     private Extractor extractor;
     private Transformer transformer;
+    private RecordLimiter recordLimiter;
     private Loader loader;
     private String srcPath;
     private String destPath;
 
-    Etl(Extractor extractor, Transformer transformer, Loader loader, String srcPath, String destPath)
+    Etl(Extractor extractor, Transformer transformer, Loader loader, String srcPath, String destPath, int recordsLimitPerFile)
     {
         this.extractor = extractor;
         this.transformer = transformer;
         this.loader = loader;
         this.srcPath = srcPath;
         this.destPath = destPath;
+        this.recordLimiter = new RecordLimiter(recordsLimitPerFile);
     }
 
     public void processData()
@@ -21,6 +23,10 @@ public class Etl {
         ArrayList<DataContainer> dataContainer;
         dataContainer = extractor.extract(srcPath);
         dataContainer = transformer.transform(dataContainer);
-        loader.load(dataContainer, destPath);
+        ArrayList<ArrayList<DataContainer>> dataContainers = recordLimiter.getLimitedList(dataContainer);
+        for(ArrayList<DataContainer> containersList : dataContainers)
+        {
+            loader.load(containersList, destPath);
+        }
     }
 }
