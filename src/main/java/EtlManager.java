@@ -1,7 +1,7 @@
 public class EtlManager {
-    private static ExtractorManager extractorManager = new ExtractorManager();
-    private static TransformerManager transformerManager = new TransformerManager();
-    private static LoaderManager loaderManager = new LoaderManager();
+    private static final ExtractorManager extractorManager = new ExtractorManager();
+    private static final TransformerManager transformerManager = new TransformerManager();
+    private static final LoaderManager loaderManager = new LoaderManager();
 
     public Etl createEtl(String src, String srcType, String dest, String destType, String transformerType)
     {
