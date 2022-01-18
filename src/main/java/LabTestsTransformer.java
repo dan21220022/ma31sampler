@@ -10,13 +10,11 @@ public class LabTestsTransformer implements Transformer{
         HealthCareInfoProvider healthCareInfoProvider = new HealthCareInfoProvider();
         for(int i = 0; i < dataForTransform.size(); i++)
         {
-            //System.out.println(dataForTransform.get(i).getData().get("IDNum"));
             int currentPatientId = Integer.parseInt((String) dataForTransform.get(i).getData().get("IDNum"));
             int currentPatientIdType = Integer.parseInt((String) dataForTransform.get(i).getData().get("IDType"));
             try {
                 PersonInsured personInsured = healthCareInfoProvider.fetchInfo(currentPatientId, currentPatientIdType);
 
-                System.out.println(personInsured.getJoinDate());
                 dataForTransform.get(i).addData("JOIN_DATE", personInsured.getJoinDate().toString());
                 dataForTransform.get(i).addData("HEALTH_CARE_ID", personInsured.getHealthCareId());
                 dataForTransform.get(i).addData("HEALTH_CARE_NAME", personInsured.getHealthCareId());
