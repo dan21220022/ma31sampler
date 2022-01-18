@@ -7,6 +7,7 @@ public class TransformerManager {
     {
         transformersMap = new HashMap<>();
         transformersMap.put("Default", new DefaultTransformer());
+        transformersMap.put("LabTests", new LabTestsTransformer());
     }
 
     public Transformer getTransformer(String transformerType) {

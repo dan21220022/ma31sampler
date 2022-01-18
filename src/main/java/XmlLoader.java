@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class XmlLoader implements Loader{
     @Override
     public void load(ArrayList<DataContainer> dataContainer, String destPath) {
         XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.registerModule(new JavaTimeModule());
         try {
             clearFile(destPath);
             String xmlConverted = createXmlString(xmlMapper, dataContainer);
