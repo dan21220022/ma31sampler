@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 
-public class RecordLimiter {
-    private int limit = 0;
+public class RecordLimiter extends Limiter{
 
     RecordLimiter(int limit)
     {
-        this.limit = limit;
+        super(limit);
     }
 
     public ArrayList<ArrayList<DataContainer>> getLimitedList(ArrayList<DataContainer> container)
