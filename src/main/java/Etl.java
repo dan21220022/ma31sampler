@@ -33,4 +33,11 @@ public class Etl {
         }
         System.out.println("Completed!");
     }
+
+    public void combineData(String srcPath2)
+    {
+        int currentFileIndex = 0;
+        ArrayList<DataContainer> dataContainer;
+        dataContainer = extractor.extract(srcPath);
+    }
 }

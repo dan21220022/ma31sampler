@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
-public class DefaultTransformer implements Transformer{
+public class CombineCsvTransformer implements Transformer{
+
+
     @Override
     public ArrayList<DataContainer> transform(Object dataForTransform) {
-        return (ArrayList<DataContainer>) dataForTransform;
+        return null;
     }
 }
