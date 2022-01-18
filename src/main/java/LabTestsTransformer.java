@@ -12,14 +12,16 @@ public class LabTestsTransformer implements Transformer{
         {
             int currentPatientId = Integer.parseInt((String) dataForTransform.get(i).getData().get("IDNum"));
             int currentPatientIdType = Integer.parseInt((String) dataForTransform.get(i).getData().get("IDType"));
-            try {
-                PersonInsured personInsured = healthCareInfoProvider.fetchInfo(currentPatientId, currentPatientIdType);
+            if(String.valueOf(currentPatientId).length() == 9) {
+                try {
+                    PersonInsured personInsured = healthCareInfoProvider.fetchInfo(currentPatientId, currentPatientIdType);
 
-                dataForTransform.get(i).addData("JOIN_DATE", personInsured.getJoinDate().toString());
-                dataForTransform.get(i).addData("HEALTH_CARE_ID", personInsured.getHealthCareId());
-                dataForTransform.get(i).addData("HEALTH_CARE_NAME", personInsured.getHealthCareId());
-            } catch (InvalidIdException e) {
-                e.printStackTrace();
+                    dataForTransform.get(i).addData("JOIN_DATE", personInsured.getJoinDate().toString());
+                    dataForTransform.get(i).addData("HEALTH_CARE_ID", personInsured.getHealthCareId());
+                    dataForTransform.get(i).addData("HEALTH_CARE_NAME", personInsured.getHealthCareId());
+                } catch (InvalidIdException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return dataForTransform;
