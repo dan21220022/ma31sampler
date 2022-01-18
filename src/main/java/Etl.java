@@ -37,7 +37,18 @@ public class Etl {
     public void combineData(String srcPath2)
     {
         int currentFileIndex = 0;
+        ArrayList<ArrayList<DataContainer>> dataContainersList = new ArrayList<>();
         ArrayList<DataContainer> dataContainer;
-        dataContainer = extractor.extract(srcPath);
+        dataContainersList.add(extractor.extract(srcPath));
+        dataContainersList.add(extractor.extract(srcPath2));
+        dataContainer = transformer.transform(dataContainersList);
+        ArrayList<ArrayList<DataContainer>> dataContainers = recordLimiter.getLimitedList(dataContainer);
+        for(ArrayList<DataContainer> containersList : dataContainers)
+        {
+            String nextName = destPath.substring(0, destPath.lastIndexOf('.')) + "" + currentFileIndex + "" + destPath.substring(destPath.lastIndexOf('.'));
+            loader.load(containersList, nextName);
+            currentFileIndex++;
+        }
+        System.out.println("Completed!");
     }
 }
