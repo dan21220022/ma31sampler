@@ -7,7 +7,7 @@ public class LimiterManager {
     {
         limitersMap = new HashMap<>();
         limitersMap.put("Record", new RecordLimiter());
-        limitersMap.put("FileSize", new RecordLimiter());
+        limitersMap.put("FileSize", new FileSizeLimiter());
     }
 
     public Limiter getLimiter(String limiterType, int limit)

@@ -3,19 +3,19 @@ import java.util.ArrayList;
 public class Etl {
     private Extractor extractor;
     private Transformer transformer;
-    private RecordLimiter recordLimiter;
+    private Limiter limiter;
     private Loader loader;
     private String srcPath;
     private String destPath;
 
-    Etl(Extractor extractor, Transformer transformer, Loader loader, String srcPath, String destPath, int recordsLimitPerFile)
+    Etl(Extractor extractor, Transformer transformer, Loader loader, String srcPath, String destPath, Limiter limiter)
     {
         this.extractor = extractor;
         this.transformer = transformer;
         this.loader = loader;
         this.srcPath = srcPath;
         this.destPath = destPath;
-        this.recordLimiter = new RecordLimiter(recordsLimitPerFile);
+        this.limiter = limiter;
     }
 
     public void processData()
@@ -24,7 +24,7 @@ public class Etl {
         ArrayList<DataContainer> dataContainer;
         dataContainer = extractor.extract(srcPath);
         dataContainer = transformer.transform(dataContainer);
-        ArrayList<ArrayList<DataContainer>> dataContainers = recordLimiter.getLimitedList(dataContainer);
+        ArrayList<ArrayList<DataContainer>> dataContainers = limiter.getLimitedList(dataContainer);
         for(ArrayList<DataContainer> containersList : dataContainers)
         {
             String nextName = destPath.substring(0, destPath.lastIndexOf('.')) + "" + currentFileIndex + "" + destPath.substring(destPath.lastIndexOf('.'));
@@ -42,7 +42,7 @@ public class Etl {
         dataContainersList.add(extractor.extract(srcPath));
         dataContainersList.add(extractor.extract(srcPath2));
         dataContainer = transformer.transform(dataContainersList);
-        ArrayList<ArrayList<DataContainer>> dataContainers = recordLimiter.getLimitedList(dataContainer);
+        ArrayList<ArrayList<DataContainer>> dataContainers = limiter.getLimitedList(dataContainer);
         for(ArrayList<DataContainer> containersList : dataContainers)
         {
             String nextName = destPath.substring(0, destPath.lastIndexOf('.')) + "" + currentFileIndex + "" + destPath.substring(destPath.lastIndexOf('.'));
